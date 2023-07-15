@@ -60,7 +60,6 @@ export default {
         });
     },
     resetForm(form){
-      console.log(this.$refs)
       this.$refs[form].resetFields();
     }
   }

@@ -24,7 +24,7 @@
                     </el-submenu>
                 </el-menu>
             </el-aside>
-            <el-main>
+            <el-main class="el-main">
                 <router-view></router-view>
             </el-main>
         </el-container>
@@ -54,7 +54,6 @@ export default {
             if(res.meta.status!=200){
                 this.$message.error("获取菜单失败！")
             }else{
-                console.log(res);
                 this.menus = res.data;
             }
         },
@@ -105,6 +104,16 @@ export default {
             display: flex;
             align-items: center;
             justify-content: flex-end;
+        }
+    }
+    .el-main{
+        text-align: start;
+        background: #E9EDF1;
+        .el-breadcrumb,.search{
+            margin: 0 0 20px;
+        }
+        .el-pagination{
+            margin: 20px 0 0;
         }
     }
 </style>
