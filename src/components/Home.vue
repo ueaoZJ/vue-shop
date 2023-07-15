@@ -44,6 +44,9 @@ export default {
     created(){
         this.getMenulist();
         this.activeItem = window.sessionStorage.getItem('activeItem');
+        if(this.activeItem){
+            this.$router.push(`/${this.activeItem}`)
+        }
     },
     methods:{
         saveActiveItem(activeItem){

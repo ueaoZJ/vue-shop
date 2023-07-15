@@ -268,7 +268,6 @@ export default {
             this.$refs['changeUserForm'].validate(async(valid)=>{
                 if(valid){
                     const {data:res} = await this.$http.put(`users/${this.changeUserId}`,this.changeUserForm);
-                    console.log(res);
                     if(res.meta.status == 200){
                         this.$message.success(res.meta.msg);
                         this.getUserList();
