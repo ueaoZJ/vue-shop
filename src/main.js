@@ -14,6 +14,14 @@ axios.interceptors.request.use(config=>{
 })
 Vue.prototype.$http = axios
 
+let originPush =  Vue.prototype.push;  //备份原push方法
+Vue.prototype.push = function (location, resolve, reject){
+    if (resolve && reject) {    //如果传了回调函数，直接使用
+        originPush.call(this, location, resolve, reject);
+    }else {                     //如果没有传回调函数，手动添加
+        originPush.call(this, location, ()=>{}, ()=>{}); 
+    }
+}
 
 new Vue({
   router,

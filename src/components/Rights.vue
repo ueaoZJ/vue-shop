@@ -42,7 +42,7 @@
 export default {
     data(){
         return{
-            rightsData:{}
+            rightsData:[]
         }
     },
     created(){
@@ -51,7 +51,6 @@ export default {
     methods:{
         async getRights(){
             const {data:res} = await this.$http.get("rights/list");
-            console.log(res)
             if(res.meta.status==200){
                 this.rightsData = res.data;
             }else{

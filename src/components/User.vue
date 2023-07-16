@@ -62,7 +62,7 @@
                             <el-button @click="deleteUser(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
                         </el-tooltip>
                         <el-tooltip class="item" effect="dark" content="分配角色" placement="top" >
-                            <el-button type="warning" icon="el-icon-setting" circle></el-button>
+                            <el-button @click="openRolesDialog(scope.row)"  type="warning" icon="el-icon-setting" circle></el-button>
                         </el-tooltip>
                     </template>
                 </el-table-column>
@@ -102,7 +102,7 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
-        <!-- 添加用户对话框 -->
+        <!-- 修改用户信息对话框 -->
         <el-dialog
         title="修改用户信息"
         :visible.sync="changeUserDialogVisible"
@@ -123,6 +123,32 @@
                     <el-button type="primary" @click="changeUser">确 定</el-button>
                 </el-form-item>
             </el-form>
+        </el-dialog>
+        <!-- 分配权限对话框 -->
+        <el-dialog
+        title="分配角色"
+        :visible.sync="rolesDialogVisible"
+        width="30%"
+        @close="closeRolesDialog">
+            <div>
+                <p>当前的用户：{{userInfo.username}}</p>
+                <p>当前的角色：{{userInfo.role_name}}</p>
+                <p>分配新角色：
+                    <el-select v-model="selectValue" placeholder="请选择">
+                        <el-option
+                        v-for="item in allRolesData"
+                        :key="item.id"
+                        :label="item.roleName"
+                        :value="item.id">
+                        </el-option>
+                    </el-select>
+                </p>
+                
+            </div>
+            <div class="button-group">
+                <el-button @click="closeRolesDialog">取 消</el-button>
+                <el-button type="primary" @click="addUserRights()">确 定</el-button>
+            </div>
         </el-dialog>
     </div>
 </template>
@@ -176,6 +202,11 @@ export default {
                 ]
             },
             changeUserId:'',
+
+            rolesDialogVisible:false,
+            userInfo:[],
+            selectValue:'',//选中的值
+            allRolesData:[],
         }
     },
     created(){
@@ -280,17 +311,43 @@ export default {
                     return false;
                 }
             })
+        },
+        closeRolesDialog(){
+            this.selectValue='';
+            this.rolesDialogVisible = false;
+        },
+        async openRolesDialog(row){
+            this.userInfo = row;
+            const {data:res} = await this.$http.get('/roles');
+            if(res.meta.status == 200){
+                this.allRolesData = res.data;
+            }else{
+                this.$message.error(res.meta.msg);
+            }
+            this.rolesDialogVisible = true;
+        },
+        async addUserRights(){
+            if(this.selectValue){
+                const {data:res} = await this.$http.put(`users/${this.userInfo.id}/role`,{'rid':this.selectValue});
+                if(res.meta.status == 200){
+                    this.$message.success(res.meta.msg);
+                    this.getUserList();
+                    this.closeRolesDialog();
+                }else{
+                    this.$message.error(res.meta.msg);
+                }
+            }else{
+                this.closeRolesDialog();
+            }
         }
     }
 }
 </script>
 
 <style lang="less">
-    .add-user-form,.change-user-form{
-        .button-group{
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;            
-        }
+    .button-group{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;  
     }
 </style>
