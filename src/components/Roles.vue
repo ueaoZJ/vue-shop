@@ -46,11 +46,13 @@
                 </el-table-column>
                 <el-table-column
                 prop="roleName"
-                label="角色名称">
+                label="角色名称"
+                width="300">
                 </el-table-column>
                 <el-table-column
                 prop="roleDesc"
-                label="角色描述">
+                label="角色描述"
+                width="300">
                 </el-table-column>
                 <el-table-column
                 label="操作">
