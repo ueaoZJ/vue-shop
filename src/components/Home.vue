@@ -10,12 +10,12 @@
                 <el-menu 
                     background-color="#313743" text-color="#fff" active-text-color="#359BFF" 
                     :default-active="activeItem" router :collapse="isCollapse" unique-opened class="el-menu-vertical-demo">
-                    <el-submenu v-for="item1 in menus" :key="item1.path" :index="item1.path">
+                    <el-submenu v-for="item1 in menus" :key="item1.path" :index="'/'+item1.path">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span slot="title">{{item1.authName}}</span>
                         </template>
-                        <el-menu-item @click="saveActiveItem(item2.path)" class="sub-menu" v-for="item2 in item1.children" :key="item2.path" :index="item2.path">
+                        <el-menu-item @click="saveActiveItem(item2.path)" class="sub-menu" v-for="item2 in item1.children" :key="item2.path" :index="'/'+item2.path">
                             <template slot="title">
                                 <i class="el-icon-location"></i>
                                 <span slot="title">{{item2.authName}}</span>
@@ -54,6 +54,7 @@ export default {
         },
         async getMenulist(){
             const {data:res} = await this.$http.get("menus");
+            console.log(res)
             if(res.meta.status!=200){
                 this.$message.error("获取菜单失败！")
             }else{
