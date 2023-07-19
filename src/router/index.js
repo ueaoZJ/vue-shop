@@ -21,28 +21,47 @@ const routes = [
     children:[
       {
         path: '/welcome',
+        name:'welcome',
         component: () => import(/* webpackChunkName: "about" */ '../components/Welcome.vue'),
       },
       {
         path: '/users',
+        name:'users',
         component: () => import(/* webpackChunkName: "about" */ '../components/User.vue'),
       },
       {
         path: '/rights',
+        name:'rights',
         component: () => import(/* webpackChunkName: "about" */ '../components/Rights.vue'),
       },
       {
         path: '/roles',
+        name:'roles',
         component: () => import(/* webpackChunkName: "about" */ '../components/Roles.vue'),
       },
       {
         path: '/categories',
+        name:'categories',
         component: () => import(/* webpackChunkName: "about" */ '../components/Categories.vue'),
       },
       {
         path: '/params',
+        name:'params',
         component: () => import(/* webpackChunkName: "about" */ '../components/Params.vue'),
-      }
+      },
+      {
+        path: '/goods',
+        name:'goods',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Goods.vue'),
+      },
+      {
+        path: '/goods/add',
+        component: () => import(/* webpackChunkName: "about" */ '../components/GoodsAdd.vue'),
+      },
+      {
+        path: '/goods/edit',
+        component: () => import(/* webpackChunkName: "about" */ '../components/GoodsEdit.vue'),
+      },
     ]
   }
 ]
