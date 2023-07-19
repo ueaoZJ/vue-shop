@@ -21,16 +21,16 @@
             :selection-type="false"
             border
             >
-                <template slot="isok" scope="scope">
+                <template slot="isok" slot-scope="scope">
                     <i style="color:lightgreen" v-if="!scope.row.cat_deleted" class="el-icon-success"></i>
                     <i style="color:red" v-else class="el-icon-error"></i>
                 </template>
-                <template slot="sort" scope="scope">
+                <template slot="sort" slot-scope="scope">
                     <el-tag v-if="scope.row.cat_level==0">一级</el-tag>
                     <el-tag type="success" v-else-if="scope.row.cat_level==1">二级</el-tag>
                     <el-tag type="warning" v-else>三级</el-tag>
                 </template>
-                <template slot="operate" scope="scope">
+                <template slot="operate" slot-scope="scope">
                     <el-button @click="openChangeDialog(scope.row)" icon="el-icon-edit" type="primary">编辑</el-button>
                     <el-button @click="deleteCate(scope.row)" icon="el-icon-delete" type="danger">删除</el-button>
                 </template>
@@ -154,6 +154,7 @@ export default {
             }
         },
         handleSizeChange(newsize){
+            console.log(123)
             this.queryInfo.pagesize = newsize;
             this.getCateData();
         },
