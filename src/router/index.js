@@ -66,6 +66,10 @@ const routes = [
         path: '/orders',
         component: () => import(/* webpackChunkName: "about" */ '../components/Orders.vue'),
       },
+      {
+        path: '/reports',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Reports.vue'),
+      }
     ]
   }
 ]
