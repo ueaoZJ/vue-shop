@@ -2,7 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import TreeTable from 'vue-table-with-tree-grid'
-
+import 'element-ui/lib/theme-chalk/index.css'
+import './plugins/element'
 import VueQuillEditor from 'vue-quill-editor'
 
 

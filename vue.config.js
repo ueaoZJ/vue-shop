@@ -10,8 +10,7 @@ module.exports = defineConfig({
         axios:'axios',
         lodash:'_',
         echarts:'echarts',
-        nprogress:'NProgress',
-        'vue-quill-editor':'VueQuillEditor'
+        nprogress:'NProgress'
       })
       config.plugin('html').tap(args=>{
         args[0].isProd = true
